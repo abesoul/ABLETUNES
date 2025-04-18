@@ -1,11 +1,12 @@
-export function setupMixer() {
-  const mixer = document.getElementById('mixer');
-  mixer.textContent = 'Mixer Ready 🎛️';
-}
 // mixer.js
 import { getTrackNodes } from './audioEngine.js';
 
 let mixerContainer = document.getElementById('mixer-channels');
+
+export function setupMixer() {
+  const mixer = document.getElementById('mixer');
+  mixer.textContent = 'Mixer Ready 🎛️';
+}
 
 export function addMixerChannel() {
   const trackIndex = getTrackNodes().length - 1;
