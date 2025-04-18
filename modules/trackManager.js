@@ -1,15 +1,25 @@
 // trackManager.js
+import { loadAndRenderAudio } from './waveformRenderer.js';
 
-export function createTrackElement(trackNumber = 1) {
+export function createTrackElement() {
   const track = document.createElement('div');
   track.classList.add('track');
 
   const label = document.createElement('span');
-  label.textContent = `Audio Track ${trackNumber}`;
+  label.textContent = `Audio Track`;
 
-  const waveform = document.createElement('div');
+  const waveform = document.createElement('canvas');
   waveform.classList.add('waveform');
-  waveform.textContent = '🔊 waveform preview...'; // Placeholder for future audio visual
+  waveform.width = 300;
+  waveform.height = 100;
+
+  const fileInput = document.createElement('input');
+  fileInput.type = 'file';
+  fileInput.accept = 'audio/*';
+  fileInput.addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (file) await loadAndRenderAudio(file, waveform);
+  });
 
   const controls = document.createElement('div');
   controls.classList.add('track-controls');
@@ -24,19 +34,9 @@ export function createTrackElement(trackNumber = 1) {
   controls.appendChild(soloBtn);
 
   track.appendChild(label);
+  track.appendChild(fileInput);
   track.appendChild(waveform);
   track.appendChild(controls);
 
   return track;
-}
-
-export function setupTrackManager() {
-  const addTrackBtn = document.getElementById('add-track-btn');
-  const trackArea = document.getElementById('tracks');
-  let trackCount = 0;
-
-  addTrackBtn.addEventListener('click', () => {
-    const newTrack = createTrackElement(++trackCount);
-    trackArea.appendChild(newTrack);
-  });
 }
