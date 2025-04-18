@@ -1,10 +1,11 @@
 // trackManager.js
-export function createTrackElement() {
+
+export function createTrackElement(trackNumber = 1) {
   const track = document.createElement('div');
   track.classList.add('track');
 
   const label = document.createElement('span');
-  label.textContent = `Audio Track`;
+  label.textContent = `Audio Track ${trackNumber}`;
 
   const waveform = document.createElement('div');
   waveform.classList.add('waveform');
@@ -27,4 +28,15 @@ export function createTrackElement() {
   track.appendChild(controls);
 
   return track;
+}
+
+export function setupTrackManager() {
+  const addTrackBtn = document.getElementById('add-track-btn');
+  const trackArea = document.getElementById('tracks');
+  let trackCount = 0;
+
+  addTrackBtn.addEventListener('click', () => {
+    const newTrack = createTrackElement(++trackCount);
+    trackArea.appendChild(newTrack);
+  });
 }
