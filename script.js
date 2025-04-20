@@ -13,3 +13,5 @@ if (user) {
 } else {
   document.getElementById('app').innerHTML = `<h2>Please log in to start using NeonDAW.</h2>`;
 }
+// Placeholder for DAW functionality, mixing, MIDI integration, etc.
+console.log('My Web DAW is running');
