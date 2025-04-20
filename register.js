@@ -9,3 +9,11 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
   alert('Account created successfully!');
   window.location.href = 'login.html';
 });
+document.getElementById('register-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const newUsername = document.getElementById('new-username').value;
+    const newPassword = document.getElementById('new-password').value;
+
+    // Handle registration logic (e.g., save new user)
+    console.log('New user registered:', newUsername);
+});
