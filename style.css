@@ -1,0 +1,75 @@
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #1f1f1f;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5em;
+  color: #00f7b8;
+}
+
+nav button {
+  background-color: #ff6347;
+  border: none;
+  color: white;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #e53d34;
+}
+
+main {
+  text-align: center;
+  margin-top: 30px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  margin: 10px;
+  padding: 10px;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button[type="submit"] {
+  background-color: #00f7b8;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #00d297;
+}
+
+a {
+  color: #00f7b8;
+}
+
+a:hover {
+  text-decoration: underline;
+}
