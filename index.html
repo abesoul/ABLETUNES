@@ -1,153 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mini Web DAW</title>
-  <style>
-    body { font-family: sans-serif; margin: 0; padding: 0; background: #111; color: #eee; }
-    header { background: #222; padding: 1rem; text-align: center; font-size: 1.5rem; }
-    #controls { display: flex; justify-content: space-between; padding: 1rem; background: #333; }
-    #tracks { padding: 1rem; }
-    .track { background: #1a1a1a; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
-    .track-controls { margin-top: 0.5rem; }
-    .waveform { background: #000; display: block; margin-top: 0.5rem; border: 1px solid #444; }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeonDAW</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>🎶 Web DAW</header>
-  <section id="controls">
-    <div>
-      <label for="tempo-slider">Tempo: </label>
-      <input type="range" id="tempo-slider" min="60" max="180" value="120" />
-      <span id="tempo-display">120 BPM</span>
-    </div>
-    <div>
-      <button id="add-track-btn">➕ Add Track</button>
-      <button onclick="saveProject()">💾 Save</button>
-      <button onclick="loadProject()">📂 Load</button>
-    </div>
-  </section>
-  <section id="tracks"></section>
-
-  <script>
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const mixer = [];
-
-    function getAudioContext() { return audioCtx; }
-    function getTrackNodes() { return mixer; }
-
-    function updateTempoDisplay(bpm) {
-      document.getElementById('tempo-display').textContent = `${bpm} BPM`;
-    }
-
-    document.getElementById('tempo-slider').addEventListener('input', (e) => {
-      updateTempoDisplay(e.target.value);
-    });
-
-    function drawWaveform(canvas, audioBuffer) {
-      const ctx = canvas.getContext('2d');
-      const { width, height } = canvas;
-      const data = audioBuffer.getChannelData(0);
-      const step = Math.ceil(data.length / width);
-      const amp = height / 2;
-
-      ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = '#222';
-      ctx.fillRect(0, 0, width, height);
-      ctx.strokeStyle = '#4caf50';
-      ctx.beginPath();
-
-      for (let i = 0; i < width; i++) {
-        const min = Math.min(...data.slice(i * step, (i + 1) * step));
-        const max = Math.max(...data.slice(i * step, (i + 1) * step));
-        ctx.moveTo(i, (1 + min) * amp);
-        ctx.lineTo(i, (1 + max) * amp);
-      }
-
-      ctx.stroke();
-    }
-
-    async function loadAndRenderAudio(file, canvas) {
-      const arrayBuffer = await file.arrayBuffer();
-      const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
-      drawWaveform(canvas, audioBuffer);
-      const source = audioCtx.createBufferSource();
-      const gainNode = mixer.at(-1);
-      source.buffer = audioBuffer;
-      source.connect(gainNode);
-      source.start(0);
-    }
-
-    function createTrackElement() {
-      const track = document.createElement('div');
-      track.classList.add('track');
-
-      const label = document.createElement('span');
-      label.textContent = `Audio Track`;
-
-      const canvas = document.createElement('canvas');
-      canvas.classList.add('waveform');
-      canvas.width = 300;
-      canvas.height = 100;
-
-      const fileInput = document.createElement('input');
-      fileInput.type = 'file';
-      fileInput.accept = 'audio/*';
-      fileInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (file) loadAndRenderAudio(file, canvas);
-      });
-
-      const controls = document.createElement('div');
-      controls.classList.add('track-controls');
-
-      const muteBtn = document.createElement('button');
-      muteBtn.textContent = 'Mute';
-      muteBtn.addEventListener('click', () => {
-        const gain = mixer.at(-1);
-        gain.gain.value = gain.gain.value === 0 ? 1 : 0;
-      });
-
-      const soloBtn = document.createElement('button');
-      soloBtn.textContent = 'Solo';
-      soloBtn.addEventListener('click', () => alert('Solo logic here'));
-
-      controls.appendChild(muteBtn);
-      controls.appendChild(soloBtn);
-
-      const gainNode = audioCtx.createGain();
-      gainNode.connect(audioCtx.destination);
-      mixer.push(gainNode);
-
-      track.appendChild(label);
-      track.appendChild(fileInput);
-      track.appendChild(canvas);
-      track.appendChild(controls);
-
-      return track;
-    }
-
-    document.getElementById('add-track-btn').addEventListener('click', () => {
-      document.getElementById('tracks').appendChild(createTrackElement());
-    });
-
-    function saveProject() {
-      const gains = document.querySelectorAll('.track');
-      const tempo = document.getElementById('tempo-slider').value;
-      const volumes = Array.from(gains).map((_, i) => mixer[i].gain.value);
-      localStorage.setItem('daw_project', JSON.stringify({ tempo, volumes }));
-      alert('🎉 Project saved!');
-    }
-
-    function loadProject() {
-      const saved = localStorage.getItem('daw_project');
-      if (!saved) return alert('❌ No saved project found');
-      const data = JSON.parse(saved);
-      document.getElementById('tempo-slider').value = data.tempo;
-      updateTempoDisplay(data.tempo);
-      alert('📂 Project loaded. Add tracks manually to resync visuals.');
-    }
-  </script>
+  <div class="container">
+    <header>
+      <h1>NeonDAW</h1>
+      <nav>
+        <button id="loginBtn">Login</button>
+        <button id="registerBtn">Register</button>
+      </nav>
+    </header>
+    <main id="app">
+      <h2>Welcome to NeonDAW!</h2>
+      <p>Get started by logging in or registering.</p>
+    </main>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
