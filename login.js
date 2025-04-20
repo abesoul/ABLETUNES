@@ -12,3 +12,11 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     alert('Invalid credentials, please try again.');
   }
 });
+document.getElementById('login-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    // Handle login logic (e.g., validate credentials)
+    console.log('User login:', username);
+});
