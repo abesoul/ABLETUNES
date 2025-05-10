@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - My Web DAW</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - NeonDAW</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-    <header>
-        <h1>Login</h1>
-    </header>
+<body class="login-body">
+  <div class="login-wrapper">
+    <div class="login-box glass">
+      <h1 class="neon-title">🔥 NeonDAW 🔊</h1>
+      <h2 class="neon-subtitle">Login to your account</h2>
+      <form id="login-form" autocomplete="off">
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Enter your username" required />
+        </div>
 
-    <main>
-        <form id="login-form">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required />
+        </div>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-
-            <button type="submit">Login</button>
-        </form>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 My Web DAW</p>
-    </footer>
-
-    <script src="login.js"></script>
+        <button type="submit" class="neon-button">Login</button>
+      </form>
+      <p class="register-link">
+        Don’t have an account? <a href="register.html">Register here</a>
+      </p>
+    </div>
+  </div>
+  <script src="login.js"></script>
 </body>
 </html>
