@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - My Web DAW</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register | NeonDAW</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-    <header>
-        <h1>Register</h1>
-    </header>
+<body class="login-body">
+  <div class="login-wrapper">
+    <div class="login-box glass">
+      <h1 class="neon-title">🚀 NeonDAW</h1>
+      <h2 class="form-subtitle">Create your account</h2>
 
-    <main>
-        <form id="register-form">
-            <label for="new-username">Username:</label>
-            <input type="text" id="new-username" name="new-username" required>
+      <form id="register-form" autocomplete="off">
+        <label for="new-username">Username</label>
+        <input type="text" id="new-username" name="username" placeholder="Enter username" required />
 
-            <label for="new-password">Password:</label>
-            <input type="password" id="new-password" name="new-password" required>
+        <label for="new-password">Password</label>
+        <input type="password" id="new-password" name="password" placeholder="Enter password" required />
 
-            <button type="submit">Register</button>
-        </form>
-    </main>
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password" required />
 
-    <footer>
-        <p>&copy; 2025 My Web DAW</p>
-    </footer>
+        <button type="submit" class="neon-button">Register</button>
+      </form>
 
-    <script src="register.js"></script>
+      <p class="register-link">
+        Already have an account? <a href="login.html">Login here</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="register.js"></script>
 </body>
 </html>
