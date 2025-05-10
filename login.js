@@ -1,22 +1,30 @@
-document.getElementById('loginForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
+document.addEventListener('DOMContentLoaded', () => {
+  const loginForm = document.getElementById('login-form');
 
-  // Check credentials (simplified for demonstration)
-  if (email === 'user@example.com' && password === 'password123') {
-    localStorage.setItem('user', JSON.stringify({ email }));
-    window.location.href = 'index.html';
-  } else {
-    alert('Invalid credentials, please try again.');
-  }
-});
-document.getElementById('login-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const username = document.getElementById('username').value;
+  loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value;
 
-    // Handle login logic (e.g., validate credentials)
-    console.log('User login:', username);
+    if (!username || !password) {
+      alert('Please enter both username and password.');
+      return;
+    }
+
+    // Get stored users from localStorage
+    const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+
+    // Match user
+    const matchedUser = storedUsers.find(user =>
+      user.username === username && user.password === password
+    );
+
+    if (matchedUser) {
+      localStorage.setItem('loggedInUser', username);
+      window.location.href = 'index.html'; // Redirect to main NeonDAW
+    } else {
+      alert('❌ Invalid username or password. Please try again.');
+    }
+  });
 });
